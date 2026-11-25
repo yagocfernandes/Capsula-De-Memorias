@@ -1,0 +1,17 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /gifts/{giftId} {
+      // 1. Leitura 100% pública: qualquer pessoa com o link pode abrir e ver o presente sem login
+      allow read: if true;
+
+      // 2. Criação protegida: apenas usuários autenticados podem criar presentes vinculados ao seu próprio uid
+      allow create: if request.auth != null
+                    && request.resource.data.userId == request.auth.uid;
+
+      // 3. Edição e exclusão restritas: apenas o dono do presente pode alterá-lo ou excluí-lo
+      allow update, delete: if request.auth != null
+                            && request.auth.uid == resource.data.userId;
+    }
+  }
+}
