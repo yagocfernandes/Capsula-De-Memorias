@@ -140,4 +140,4 @@ service cloud.firestore {
 
 ## Créditos e Licença
 
-Desenvolvido por Iago Leonardo | Discord: HighestCoder
+Desenvolvido por Yago Leonardo | Discord: HighestCoder
